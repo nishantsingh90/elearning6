@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row d-flex justify-content-center">
+<div class="card mb-3" style="max-width: 680px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="{{ user.profile.profile_picture.url }}" class="card-img" alt="...">
+      <!-- <a href="#" class="fa fa-facebook"></a>
+        <a href="#" class="fa fa-twitter"></a>
+        <a href="#" class="fa fa-google"></a>
+        <a href="#" class="fa fa-linkedin"></a> -->
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"></i>  {{ user.profile.first_name}}</h5>
+        <p class="card-text"><i class="fa fa-briefcase" style="font-size:25px" aria-hidden="true">  </i>     {{ user.profile.profession}}</p>
+        <p class="card-text"><i class="fa fa-home"  style= "font-size:25px" aria-hidden="true"></i>     {{ user.profile.city}}</p>
+        <!-- <p class="card-text">{{ user.profile.profession}}</p> -->
+        {% if follow%}
+        {% if request.user.is_authenticated %}
+        <p> 
+        <span><a href="{% url 'product:unfollow' user %}" class="btn btn-secondary btn-lg btn-trim " role="button">Following</a></span> 
+        <!-- <span><a href="" class="btn btn-success btn-lg " role="button">Message</a></span> </p> --></p>
+        {%endif%}
+        {%else%}
+        <p><span><a href="{% url 'product:follow' user %}" class="btn btn-dark btn-lg " role="button">Follow</a></span> </p>
+        {%endif%}
+      
+    
+        <a href="#" class="fa fa-facebook" style="padding: 17px;
+        font-size: 30px;
+        width: 60px;
+        text-align: center;
+        text-decoration: none;
+        margin: 3px 2px;
+        border-radius: 60%;"></a>
+        
+        <a href="#" class="fa fa-twitter"  style="padding: 17px;
+        font-size: 30px;
+        width: 60px;
+        text-align: center;
+        text-decoration: none;
+        margin: 3px 2px;
+        border-radius: 60%;"></a>
+        <!-- <a href="#" class="fa fa-google" style="padding: 17px;
+        font-size: 30px;
+        width: 60px;
+        text-align: center;
+        text-decoration: none;
+        margin: 5px 2px;
+        border-radius: 60%;"></a> -->
+        <a href="#" class="fa fa-linkedin" style="padding: 17px;
+        font-size: 30px;
+        width: 60px;
+        text-align: center;
+        text-decoration: none;
+        margin: 5px 2px;
+        border-radius: 60%;"></a>
+    
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </div> -->
+
+
+    <!-- Post-->
+    <section class="featured-posts no-padding-top">
+      <div class="container">
+    {% for obj in featured %}
+    <div class="row d-flex align-items-stretch">
+      {% if not forloop.first and not forloop.last %}
+      <div class="image col-lg-5"><img src="{{ obj.thumbnail.url }}" alt="..."></div>
+      {% endif %}
+      <div class="text col-lg-7">
+        <div class="text-inner d-flex align-items-center">
+          <div class="content">
+            <header class="post-header">
+              <div class="category">
+                {% for cat in obj.categories.all %}
+                <a href="#">{{ cat }}</a>
+                {% endfor %}
+              </div>
+              <a href="{{ obj.get_absolute_url }}">
+                <h2 class="h4">{{ obj.title }}</h2>
+                </a>
+            </header>
+            <p>{{ obj.overview|linebreaks|truncatechars:200 }}</p>
+            <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                <div class="avatar"><img src="{{ obj.author.user.profile.profile_picture.url }}" alt="..." class="img-fluid"></div>
+                <div class="title"><span><a href="" {{ obj.author }}></a></span></div></a>
+              <div class="date"><i class="icon-clock"></i> {{ obj.timestamp|timesince }} ago</div>
+              <div class="comments"><i class="icon-comment"></i>{{ obj.comment_count }}</div>
+            </footer>
+          </div>
+        </div>
+      </div>
+      {% if forloop.first or forloop.last %}
+      <div class="image col-lg-5"><img src="{{ obj.thumbnail.url }}" alt="..."></div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- <section class="latest-posts"> 
+  <div class="container">
+    <header> 
+      <h2>Latest from the blog</h2>
+      <p class="text-big">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    </header>
+    <div class="row">
+      {% for obj in latest %}
+      <div class="post col-md-4">
+        <div class="post-thumbnail"><a href="#"><img src="{{ obj.thumbnail.url }}" alt="..." class="img-fluid"></a></div>
+        <div class="post-details">
+          <div class="post-meta d-flex justify-content-between">
+            <div class="date">{{ obj.timestamp }}</div>
+            <div class="category">
+              {% for cat in obj.categories.all %}
+              <a href="#">{{ cat }}</a>
+              {% endfor %}
+              </div>
+          </div><a href="#">
+            <h3 class="h4">{{ obj.title }}</h3></a>
+          <p class="text-muted">{{ obj.overview|linebreaks|truncatechars:200 }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div> -->
+<!-- </section> -->
+{% endblock content %}

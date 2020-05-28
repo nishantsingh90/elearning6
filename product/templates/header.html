@@ -1,0 +1,130 @@
+{% load notification_template_tags %}
+    <header class="header">
+      <!-- Main Navbar-->
+      <nav class="navbar navbar-expand-lg">
+        <div class="search-area">
+          <div class="search-area-inner d-flex align-items-center justify-content-center">
+            <div class="close-btn"><i class="icon-close"></i></div>
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-8">
+                <form action="">
+                  <div class="form-group">
+                    <input type="search" name="q" id="search" placeholder="What are you looking for?">
+                    <button type="submit" class="submit"><i class="icon-search-1"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <!-- Navbar Brand -->
+          <div class="navbar-header d-flex align-items-center justify-content-between">
+            <!-- Navbar Brand --><a href="/" class="navbar-brand">DEV</a>
+            <!-- Toggle Button-->
+            <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span></span><span></span><span></span></button>
+          </div>
+          <!-- Navbar Menu -->
+          <div id="navbarcollapse" class="collapse navbar-collapse">
+            <!-- <form class="form-inline">
+              <form method="get" action="{% url 'product:search' %}" accept-charset="UTF-8"><input class="form-control mr-sm-2" type="hidden" name="utf8" value="✓"><input class="form-control mr-sm-2" type="text" name="q" id="nav-search" placeholder="Search..." autocomplete="off" aria-label="search">
+              </form> -->
+              <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+              <!-- <span class="search-submit-btn"><span><i class="glyphicon glyphicon-search"></i></span></span>
+            </form>  -->
+            <form id="searchform" action="{% url 'product:search' %}" method="get" accept-charset="utf-8">
+              <!-- <button class="searchbutton" type="submit">
+                <!-- <i class="fa fa-search"></i> -->
+              </button> 
+              <input class="form-control mr-sm-2" id="searchbox" name="q" type="text" placeholder="Search">
+            </form>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><a href="/" class="nav-link ">Home</a>
+              </li>
+              <!-- <li class="nav-item"><a href="/blog" class="nav-link active ">Blog</a> -->
+
+              </li>
+              <li class="nav-item"><a href="/" class="nav-link "></a>
+              </li>
+              <li class="nav-item"><a href="/" class="nav-link "></a>
+              </li>
+              <li class="nav-item"><a href="/" class="nav-link "></a>
+              </li>
+              <li class="nav-item"><a href="/" class="nav-link "></a>
+              </li>
+              <li class="nav-item"><a href="/" class="nav-link "></a>
+              </li>
+              {% if not request.user.is_authenticated %}
+              <li class="nav-item"><a href="{% url 'product:login' %}" class="btn btn-success btn-lg btn-trim" role="button">Write a post</a>
+              </li>
+              {%endif%}
+              {% if request.user.is_authenticated %}
+              <li class="nav-item"><a href="{% url 'product:post-create'  %}" class="btn btn-success btn-lg btn-trim" role="button">Write a post</a>
+              </li>
+              
+             
+              
+              <li class="nav-item"><a href="/" class="nav-link "></a>
+              </li>
+              <!-- <i class="fa fa-envelope-o" style="font-size:30px" aria-hidden="true"></i> -->
+              <!-- <li class="nav-item"><a href="/" class="nav-link "></a>
+              </li> -->
+              
+              <button class="btn btn-default btn-lg btn-link" style="font-size:76px;"></button>
+              <div class="container">
+                <!-- <li class="nav-item"><a href="/" class="nav-link "></a>
+              </li> -->
+              <a href="{% url 'notify:all'  %}"><i class="fa fa-bell-o"   style="font-size:30px" aria-hidden="true"></i></a>
+              
+              <!-- <span class="badge badge-notify"><a href="{% url 'notify:all'  %}">{{ request.user|notification_count }}</a></span>
+             -->
+            </button>
+              </div>
+          
+          
+              <li class="nav-item"><a href="{% url 'notify:all'  %}" class="nav-link "></a>
+              </li>
+            
+              
+              
+              <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="true"> -->
+
+                  <i class="fa fa-user" style="font-size:30px"></i>
+                </a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                  </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-default"
+                  aria-labelledby="navbarDropdownMenuLink-333">
+                  <!-- <a class="dropdown-item" href="#">LOGIN</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a> -->
+                  
+                  <!-- <a class="dropdown-item" href="">Hello,{{request.user|upper}}</a> -->
+          <a class="dropdown-item" href="{% url 'product:update_profile' %}">Update Your Profile</a>
+          <a class="dropdown-item" href="{% url 'product:logout' %}">Logout</a>
+          
+          {% else %}
+          <a class="dropdown-item" href="{% url 'product:register' %}">REGISTER</a>
+          <a class="dropdown-item" href="{% url 'product:login' %}">LOGIN</a>
+                </div>
+              </li>
+              {% endif %}
+              
+              <!-- <li class="nav-item"><a href="#" class="nav-link ">Contact</a>
+              </li>
+              {% if request.user.is_staff %}
+              <li class="nav-item"><a href="" class="nav-link ">Create</a> -->
+              <!-- </li>
+              {% endif %}
+            </ul> -->
+            <!-- <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>
+            {% comment %} <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>           </span><a href="#">ES</a></ul> {% endcomment %} -->
+          </div>
+        </div>
+      </nav>
+    </header>
