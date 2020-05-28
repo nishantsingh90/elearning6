@@ -26,7 +26,7 @@ SECRET_KEY = ')@p&3tz_)@wq1@mxz*gwxs94kh#d&68e#feuf674rxa)xembgq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['aacharan.herokuapp.com']
+ALLOWED_HOSTS = ['aacharan.herokuapp.com','127.0.0.1']
 # AUTH_USER_MODEL = 'product.MyUser'
 
 
@@ -107,6 +107,12 @@ WSGI_APPLICATION = 'elearning.wsgi.application'
 #         'PORT': '',
 #     }
 # }
+DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'postgresql',
+        }
+}
 
 
 # Password validation
